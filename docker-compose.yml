@@ -1,0 +1,79 @@
+services:
+  rabbitmq-service:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 15s
+      timeout: 5s
+  students-data-producer-service:
+    image: students-data-producer:0.0.1
+    build: students-data-producer/
+    depends_on:
+      rabbitmq-service:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail localhost:8080 || exit 1
+      interval: 15s
+      timeout: 5s
+    ports:
+      - 8080:8080
+  financial-assistance-generator-service:
+    image: financial-assistance-generator:0.0.1
+    build: financial-assistance-generator/
+    volumes:
+      - ./student-documents:/usr/share/financial-assistance-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy
+  social-food-generator-service:
+    image: social-food-generator:0.0.1
+    build: social-food-generator/
+    volumes:
+      - ./student-documents:/usr/share/social-food-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy
+  transportation-costs-generator-service:
+    image: transportation-costs-generator:0.0.1
+    build: transportation-costs-generator/
+    volumes:
+      - ./student-documents:/usr/share/transportation-costs-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy
+  consent-generator-service:
+    image: consent-generator:0.0.1
+    build: consent-generator/
+    volumes:
+      - ./student-documents:/usr/share/consent-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy
+  guarantee-letter-generator-service:
+    image: guarantee-letter-generator:0.0.1
+    build: guarantee-letter-generator/
+    volumes:
+      - ./student-documents:/usr/share/guarantee-letter-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy
+  grant-generator-service:
+    image: grant-generator:0.0.1
+    build: grant-generator/
+    volumes:
+      - ./student-documents:/usr/share/grant-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy
+  contract-generator-service:
+    image: contract-generator:0.0.1
+    build: contract-generator/
+    volumes:
+      - ./student-documents:/usr/share/contract-generator/documents
+    depends_on:
+      students-data-producer-service:
+        condition: service_healthy

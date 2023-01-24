@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Student</title>
+</head>
+<style>
+    form {
+        width: 370px;
+        margin: auto
+    }
+
+    input[type=text], input[type=number] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 0 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=number]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    .field {
+        margin-bottom: 20px;
+        height: 80px;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+        width: 400px;
+    }
+
+    .sendbtn {
+        background-color: #5237d5;
+        color: white;
+        padding: 16px 20px;
+        margin: 15px 0;
+        border: none;
+        cursor: pointer;
+        width: 400px;
+        opacity: 0.9;
+    }
+
+    .sendbtn:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+</style>
+<body>
+<form action="/student/send/data" method="post">
+    <div class="container">
+        <h1 style="text-align: center">Student data</h1>
+        <hr>
+
+        <div class="field">
+            <label for="firstName"><b>First name</b></label>
+            <input autocomplete="false" type="text" placeholder="Input first name" name="firstName" id="firstName"
+                   required/>
+        </div>
+
+        <div class="field">
+            <label for="lastName"><b>Last name</b></label>
+            <input autocomplete="false" type="text" placeholder="Input last name" name="lastName" id="lastName"
+                   required/>
+        </div>
+
+        <div class="field">
+            <label for="age"><b>Age</b></label>
+            <input autocomplete="false" type="number" placeholder="Input age" name="age" id="age" required/>
+        </div>
+
+        <div class="field">
+            <label for="phone"><b>Phone</b></label>
+            <input autocomplete="false" type="text" placeholder="Input phone" name="phone" id="phone" required/>
+        </div>
+
+        <div class="field">
+            <label for="course"><b>Course</b></label>
+            <input autocomplete="false" type="number" placeholder="Input course" name="course" id="course" required/>
+        </div>
+
+        <div class="field">
+            <label for="residencePlace"><b>Residence place</b></label>
+            <input autocomplete="false" type="text" placeholder="Input residence place" name="residencePlace"
+                   id="residencePlace" required/>
+        </div>
+
+        <button type="submit" class="sendbtn" value="/student/send/data">Send data</button>
+    </div>
+</form>
+</body>
+</html>
