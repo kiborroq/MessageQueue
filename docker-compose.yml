@@ -20,12 +20,12 @@ services:
       interval: 15s
       timeout: 5s
     ports:
-      - 8080:8080
+      - ${WEB_APP_PORT}:8080
   financial-assistance-generator-service:
     image: financial-assistance-generator:0.0.1
     build: financial-assistance-generator/
     volumes:
-      - ./student-documents:/usr/share/financial-assistance-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/financial-assistance-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy
@@ -33,7 +33,7 @@ services:
     image: social-food-generator:0.0.1
     build: social-food-generator/
     volumes:
-      - ./student-documents:/usr/share/social-food-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/social-food-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy
@@ -41,7 +41,7 @@ services:
     image: transportation-costs-generator:0.0.1
     build: transportation-costs-generator/
     volumes:
-      - ./student-documents:/usr/share/transportation-costs-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/transportation-costs-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy
@@ -49,7 +49,7 @@ services:
     image: consent-generator:0.0.1
     build: consent-generator/
     volumes:
-      - ./student-documents:/usr/share/consent-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/consent-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy
@@ -57,7 +57,7 @@ services:
     image: guarantee-letter-generator:0.0.1
     build: guarantee-letter-generator/
     volumes:
-      - ./student-documents:/usr/share/guarantee-letter-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/guarantee-letter-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy
@@ -65,7 +65,7 @@ services:
     image: grant-generator:0.0.1
     build: grant-generator/
     volumes:
-      - ./student-documents:/usr/share/grant-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/grant-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy
@@ -73,7 +73,7 @@ services:
     image: contract-generator:0.0.1
     build: contract-generator/
     volumes:
-      - ./student-documents:/usr/share/contract-generator/documents
+      - ${GENERATED_DOCS_DIR}:/usr/share/contract-generator/documents
     depends_on:
       students-data-producer-service:
         condition: service_healthy

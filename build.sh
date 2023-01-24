@@ -1,7 +1,8 @@
 #!bin/bash
 
-# Set me! Local maven repository path
-export REPO_DIR="/mnt/c/Users/Дмитрий Мамедов/Desktop/shcool21/MessageQueue/local-repo"
+# Set local repo directory
+export SCRIPT=$(realpath "$0")
+export REPO_DIR=$(dirname "$SCRIPT")/local-repo
 
 # Build common-generator package and install into local maven repository
 mvn -f common-generator/pom.xml clean package
